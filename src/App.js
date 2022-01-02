@@ -1,5 +1,10 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
+import longhighres from './images/Nov-Dec-2021/0.8/long highres.webp';
+import longlowres from './images/Nov-Dec-2021/0.8/long lowres.webp';
+// import coverhighres from './images/Nov-Dec-2021/0.8/cover highres.webp';
+// import coverlowres from './images/Nov-Dec-2021/0.8/cover lowres.webp';
+
 
 function App() {
   useEffect(() => {
@@ -14,9 +19,11 @@ function App() {
         <div className="cover" id="coverlowres"></div>
         <div className="cover" id="coverhighres"></div>
         <div>
-          <img className="long" id="longlowres" src="https://firebasestorage.googleapis.com/v0/b/newsletter-23e70.appspot.com/o/Mashan%20Newsletter%200.8%20long%20highres%20(quality75).webp?alt=media&token=53b15604-9564-45c8-8b44-c794203db870" />
-          <img className="long" id="longhighres"
-            src="https://firebasestorage.googleapis.com/v0/b/newsletter-23e70.appspot.com/o/Mashan%20Newsletter%200.8%20long%20highres%20(quality75).webp?alt=media&token=53b15604-9564-45c8-8b44-c794203db870" />
+          <img className="long" id="longlowres" src={longlowres} />
+          
+          
+          <img className="long" id="longhighres" src={longhighres} />
+
         </div>
       
     </div>
