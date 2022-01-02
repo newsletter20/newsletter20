@@ -1,0 +1,31 @@
+body {
+    margin: 0;
+}
+
+.cover {
+    position: fixed; 
+    width: 100vw; 
+    height: calc(var(--vh, 100vh) * 100);
+    background-size: cover; 
+    background-repeat: no-repeat;
+    background-position: left 50%;
+    z-index: -1;
+}
+
+.long {
+    margin-top:0; 
+    padding:0;
+    position: absolute; 
+    top: calc(var(--vh, 1vh) * 100); 
+    transform: translateY(-2%); 
+    left: 0;
+    width: 100%;
+}
+
+#coverhighres {
+    background-image: url('https://firebasestorage.googleapis.com/v0/b/newsletter-23e70.appspot.com/o/Mashan%20Newsletter%200.8%20cover%20highres%20(quality75).webp?alt=media&token=71e77e33-f9f4-459e-9587-14bb0d93ae32');  
+}
+
+#coverlowres {
+    background-image: url('https://firebasestorage.googleapis.com/v0/b/newsletter-23e70.appspot.com/o/Mashan%20Newsletter%200.8%20cover%20lowres.webp?alt=media&token=be9255d6-1cf1-4775-84fa-7c53c84a8356'); 
+}
