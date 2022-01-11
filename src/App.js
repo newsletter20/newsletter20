@@ -2,30 +2,35 @@ import './App.css';
 import React, { useState, useEffect } from 'react';
 import longhighres from './images/Nov-Dec-2021/0.8/long highres.webp';
 import longlowres from './images/Nov-Dec-2021/0.8/long lowres.webp';
-// import coverhighres from './images/Nov-Dec-2021/0.8/cover highres.webp';
-// import coverlowres from './images/Nov-Dec-2021/0.8/cover lowres.webp';
+import covernotitle from './images/cover background+content.png';
+import {ReactComponent as Title} from './images/cover title.svg';
 
 
 function App() {
+
+  const [isCoverLoaded, setIsCoverLoaded] = useState(false);
+  const [isLongLoaded, setIsLongLoaded] = useState(true);
+
+  
   useEffect(() => {
-    // First we get the viewport height and we multiple it by 1% to get a value for a vh unit
+    // Setting up a --vh css variable for positioning elements ignoring the address bar on mobile
     let vh = window.innerHeight * 0.01;
-    // Then we set the value in the --vh custom property to the root of the document
     document.documentElement.style.setProperty('--vh', `${vh}px`);
   }, []);
 
   return (
     <div className="App">
-        <div className="cover" id="coverlowres"></div>
-        <div className="cover" id="coverhighres"></div>
-        <div>
-          <img className="long" id="longlowres" src={longlowres} />
-          
-          
-          <img className="long" id="longhighres" src={longhighres} />
-
+        <div className="coverContainer" style={(isCoverLoaded ? {animation: "fadein 0.5s ease-in-out both"} : {})}>
+          {/* <div className="cover" id="coverlowres" onLoad={() => {setIsCoverLoaded(true)}}/> */}
+          <img className="coverN" src={covernotitle} onLoad={() => {setIsCoverLoaded(true)}}/>
         </div>
-      
+        <Title className="title"/>
+        <div className="longContainer" style={(isLongLoaded ? {animation: "slidein 0.5s 0.5s ease-in-out both"} : {})}>
+          <img className="long" id="longlowres" src={longlowres} onLoad={() => {setIsLongLoaded(true)}} />  
+          <img className="long" id="longhighres" src={longhighres} onLoad={() => {setIsLongLoaded(true)}} />
+        </div>
+        
+       
     </div>
   );
 }
