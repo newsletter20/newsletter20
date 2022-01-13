@@ -1,46 +1,71 @@
 
 .long {
+    position: absolute; 
     width: 100%;
-    transform: translateY(-2%);
+    /* transform: translateY(-2%); */
 }
 
 .longContainer {
     position: absolute; 
     top: calc(var(--vh, 1vh) * 100); 
-    padding-top: 24%;
+    width: 100%;
+    /* padding-top: 24%; */
+    height: 0;
+    opacity: 0;    
+
 }
 
 @keyframes slidein {
-    from {
-        padding-top: 24%;
+    0% {
+        /* padding-top: 24%; */
+        transform: translateY(0);
+        opacity: 0;
     }
-    to {
-        padding-top: 0;
+    20% {
+        opacity: 1;
+    }
+    100% {
+        /* padding-top: 0; */
+        transform: translateY(-25vw);
+        opacity: 1;
     }
 }
 
-.coverN {
-    position: fixed; 
-    width: 100vw; 
-    top: 50%;
-    transform: translateY(-50%);
-    /* height: calc(var(--vh, 1vh) * 100); */
+.black {
+    position: absolute; 
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+}
 
-    
+.title {
+    position: fixed;
+    margin: 10vw;
+    /* width: 100vw;  */
+    top: calc(50vh - 64vw);
+    filter: drop-shadow(0 2vw 0 rgba(0, 0, 0, 0.466));
+    /* opacity: 0; */
 }
 
 .cover {
-    position: fixed; 
+     position: fixed; 
     width: 100vw; 
-    height: calc(var(--vh, 1vh) * 100);
-    background-size: cover; 
-    background-repeat: no-repeat;
-    background-position: left 50%;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .coverContainer {
-    opacity: 0.5;
-    z-index: -1;
+    position: fixed;   
+    opacity: 0;
+}
+
+.plx {
+    position: fixed;
+    width: 100vw; 
+    top: 50%;
+    transform: translateY(-50%);
+    
+    
 }
 
 @keyframes fadein {
@@ -49,14 +74,18 @@
     }
 }
 
-.title {
-    position: fixed;
-    margin: 10vw;
-    top: calc((var(--vh, 1vh) * 50) - 64vw);
-    filter: drop-shadow(0 2vw 0 rgba(0, 0, 0, 0.466));
-    /* opacity: 0; */
-}
 
+
+.spinner {
+    position: fixed; 
+    width: 100px; 
+    top: 38%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    opacity: 0;
+    animation: fadein 0.5s 1s ease-in-out both;
+}
 
 #covernotitle {
     background-image: url(./images/cover background+content.png);  
@@ -69,3 +98,31 @@
 #coverlowres {
     background-image: url(./images/Nov-Dec-2021/0.8/cover lowres.webp); 
 }
+
+.skeleton {
+    background-color: rgb(0, 0, 0);
+    /* background-image: linear-gradient(
+      90deg,
+      rgba(240, 240, 240, 1),
+      rgba(240, 240, 240, 1),
+      rgba(255, 255, 255, 1),
+      rgba(240, 240, 240, 1),
+      rgba(240, 240, 240, 1)
+    ); */
+    background-size: 200px 100%;
+    background-repeat: no-repeat;
+    border-radius: 2px;
+    display: inline-block;
+    line-height: 1;
+    width: 100%;
+    animation: skeleton 500ms ease-in-out infinite;
+  
+    @keyframes skeleton {
+      0% {
+        background-position: -200px 0;
+      }
+      100% {
+        background-position: calc(200px + 100%) 0;
+      }
+    }
+  }
