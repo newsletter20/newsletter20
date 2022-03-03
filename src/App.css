@@ -1,12 +1,26 @@
 
 
-.long {
+.long-first {
     position: absolute;
     width: 100%;
+    right: 0;
     /* transform: translateY(-2%); */
 }
+.long-second {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    top: 605vw;
+    padding-bottom: 15%;
+    background-color: #24120f;
+    /* transform: translateY(-2%); */
+}
+/* 
+.lowres {
+    position: absolute;
+} */
 
-.longContainer {
+.long-container {
     position: absolute;
     top: calc(var(--vh, 1vh) * 100);
     width: 100%;
@@ -268,7 +282,7 @@
 
 .flags {
     padding-left: 20%;
-    width: 160%;
+    width: 180%;
 }
 
 .black-bottom {

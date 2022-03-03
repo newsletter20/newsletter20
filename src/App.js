@@ -1,25 +1,21 @@
 import './App.css';
-import React, { useState, useEffect, useRef } from 'react';
-import longhighres from './images/Nov-Dec-2021/0.8/long highres.webp';
-import longlowres from './images/Nov-Dec-2021/0.8/long lowres.webp';
-import coverPeople from './images/people1.webp';
-import coverShortBuilding from './images/short building1.webp';
-import coverTallBuilding from './images/tall building1.webp';
-import coverFlags from './images/flags1.webp';
-import coverBlobA from './images/blobA2.webp';
-import coverBlobB from './images/blobB2.webp';
-import coverBlobC from './images/blobC2.webp';
-import coverTitle from './images/title2.webp';
-import coverText from './images/text2.webp';
-import coverSky from './images/sky3.webp';
-
-import { ReactComponent as Title } from './images/cover title.svg';
-// import Parallax from 'parallax-js'
-
+import React, { useState, useEffect } from 'react';
+import longfirsthighres from './images/Jan-Feb-2022/long first highres1.webp';
+import longfirstlowres from './images/Jan-Feb-2022/long first lowres1.webp';
+import longsecondhighres from './images/Jan-Feb-2022/long second highres1.webp';
+import longsecondlowres from './images/Jan-Feb-2022/long second lowres1.webp';
+import coverPeople from './images/Jan-Feb-2022/people1.webp';
+import coverShortBuilding from './images/Jan-Feb-2022/short building1.webp';
+import coverTallBuilding from './images/Jan-Feb-2022/tall building1.webp';
+import coverFlags from './images/Jan-Feb-2022/flags1.webp';
+import coverText from './images/Jan-Feb-2022/text3.webp';
+import coverSky from './images/Jan-Feb-2022/sky3.webp';
+import { ReactComponent as Title } from './images/Jan-Feb-2022/cover title.svg';
 
 function App() {
 
-  const [isLongLoaded, setIsLongLoaded] = useState(true);
+  const [isFirstLongLoaded, setIsFirstLongLoaded] = useState(false);
+  const [isSecondLongLoaded, setIsSecondLongLoaded] = useState(false);
   const [howManyLayersLoaded, setHowManyLayersLoaded] = useState(0);
   const layersCount = 6;
 
@@ -91,6 +87,7 @@ function App() {
         // Regular non iOS 13+ devices: set listener    
         window.ondeviceorientation = e => handleOrientation(e);
         setOrientationRequestNeeded(false);
+        resetOrientation();
         console.log(2);
       }
     }
@@ -138,13 +135,10 @@ function App() {
 
 
   const requestOrientationPermission = () => {
-    // setOrientationRequestNeeded(false);
-    // return true;
     DeviceOrientationEvent.requestPermission().then(permissionState => {
       if (permissionState === 'granted') {
         window.ondeviceorientation = e => handleOrientation(e);
       }
-      // setOrientationRequested(true);
       setOrientationRequestNeeded(false);
       console.log(permissionState);
     }).catch(console.error);
@@ -152,15 +146,20 @@ function App() {
 
   const incrementLayerCount = () => {
     setHowManyLayersLoaded(howManyLayersLoaded + 1); 
+    resetOrientation();
   }
 
-  const finishedLoading = () => {
+  const coverFinishedLoading = () => {
     return (howManyLayersLoaded == layersCount) && !orientationRequestNeeded;
+  }
+
+  const longFinishedLoading = () => {
+    return isFirstLongLoaded && isSecondLongLoaded;
   }
 
   return (
     <div className="App">
-      <div className='loading-container' style={(finishedLoading() ? { opacity: 0 } : {})}>
+      <div className='loading-container' style={(coverFinishedLoading() ? { opacity: 0 } : {})}>
         <Title className="loading-title" />
         <div className="enter-button-spinner-container">
           <div className="spinner" style={(orientationRequestNeeded ? {opacity: 0} : {opacity: 1})}>
@@ -177,7 +176,7 @@ function App() {
         </div>
       </div>
 
-      <div className='parallax-container' style={(finishedLoading() ? { opacity: 1, pointerEvents: "auto" } : {})}>
+      <div className='parallax-container' style={(coverFinishedLoading() ? { opacity: 1, pointerEvents: "auto" } : {})}>
         <div className='parallax'>
           <div className='back-container'>
             <div className='parallaxed sky-container' >
@@ -192,21 +191,17 @@ function App() {
           {/* <div className='parallaxed black-bottom' style={parallax(600)}></div> */}
         </div>
       </div>
-      <div className="longContainer" style={(finishedLoading() ? { height: "auto", animation: "slidein 0.5s 1s ease-in-out both" } : {})}
-        onClick={() => {
-          DeviceMotionEvent.requestPermission();
-          // resetOrientation();
-        }}>
-        <img className="long" id="longlowres" src={longlowres} onLoad={() => { setIsLongLoaded(true) }} />
-        <img className="long" id="longhighres" src={longhighres} onLoad={() => { setIsLongLoaded(true) }} />
+
+      <div className="long-container" style={(coverFinishedLoading() && longFinishedLoading() ? { height: "auto", animation: "slidein 0.5s 1s ease-in-out both" } : {})}>
+          <img className="long-first" src={longfirstlowres} onLoad={() => { setIsFirstLongLoaded(true) }} />\
+          <img className="long-first" src={longfirsthighres} onLoad={() => { setIsFirstLongLoaded(true) }} />
+          <img className="long-second" src={longsecondlowres} onLoad={() => { setIsSecondLongLoaded(true) }} />
+         <img className="long-second" src={longsecondhighres} onLoad={() => { setIsSecondLongLoaded(true) }} />
+
       </div>
 
-      <div className='make-scrollable' style={(finishedLoading() ? { animation: "maketall 0.5s 1.5s ease-in-out both" } : {})}
-        onClick={() => {
-          resetOrientation();
-        }}
-      >
-        <p style={{ fontSize: 30 }}>
+      <div className='make-scrollable' style={(coverFinishedLoading() ? { animation: "maketall 0.5s 1.5s ease-in-out both" } : {})}>
+        {/* <p style={{ fontSize: 30 }}>
           {"device: " + deviceTiltX + ", " + deviceTiltY + " |  anchor: " + anchorTiltX + ", " + anchorTiltY}
         </p>
         <p style={{ fontSize: 30 }}>
@@ -214,7 +209,7 @@ function App() {
             "result: " + Math.max(Math.min((deviceTiltX - anchorTiltX), 90), -90) + ", " +
             Math.max(Math.min((deviceTiltY - anchorTiltY), 30), -30) + " | initialResetted = " + initialResetted + " | log: " + logit
           }
-        </p>
+        </p> */}
       </div>
 
     </div>
