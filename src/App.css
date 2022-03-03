@@ -1,12 +1,14 @@
+
+
 .long {
-    position: absolute; 
+    position: absolute;
     width: 100%;
     /* transform: translateY(-2%); */
 }
 
 .longContainer {
-    position: absolute; 
-    top: calc(var(--vh, 1vh) * 100); 
+    position: absolute;
+    top: calc(var(--vh, 1vh) * 100);
     width: 100%;
 
 
@@ -16,7 +18,7 @@
 }
 
 .make-scrollable {
-    position: absolute; 
+    position: absolute;
     width: 100vw;
     height: 0px;
     /* background-color: aliceblue; */
@@ -25,7 +27,9 @@
 }
 
 @keyframes maketall {
-    to { height: 200vh; }
+    to {
+        height: 200vh;
+    }
 }
 
 @keyframes slidein {
@@ -34,9 +38,11 @@
         transform: translateY(0);
         opacity: 0;
     }
+
     20% {
         opacity: 1;
     }
+
     100% {
         /* padding-top: 0; */
         transform: translateY(-25vw);
@@ -45,24 +51,24 @@
 }
 
 .black {
-    position: absolute; 
+    position: absolute;
     width: 100vw;
     height: 100vh;
     background-color: black;
 }
 
 .cover {
-     position: fixed; 
-    width: 100vw; 
+    position: fixed;
+    width: 100vw;
     top: 50%;
     transform: translateY(-50%);
-    
+
 }
 
 .coverContainer {
-    position: fixed;   
+    position: fixed;
     opacity: 0;
-    
+
 }
 
 .loading-container {
@@ -74,25 +80,60 @@
     justify-content: center;
     align-items: center;
 
-    /* background-image: linear-gradient(0deg, rgba(50,14,13,1) 0%, rgba(204,209,247,1) 100%); */
-    background-color: white;
     transition: opacity 0s 3s;
+    filter: drop-shadow(0 7vw 60px rgba(0, 0, 0, 0.2))
 }
 
 .loading-title {
-    width: 50vw;
+    width: 60vw;
+    filter: brightness(20%);
+    margin: 10%;
+}
 
-    
-    filter: drop-shadow(0 7vw 60px rgba(0, 0, 0, 0.3)) brightness(20%);
+.enter-button-spinner-container {
+    position: relative;
+    width: fit-content;
+    height: fit-content;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin: 7%;
+}
+
+.enter-button {
+    position: absolute;
+    font-size: 60px;
+
+    width: 300px;
+    height: 150px;
+    background-color: #333;
+    border: none;
+    border-radius: 5px;
+
+    color: white;
+    font-family: 'Heebo', sans-serif;
+    font-weight: bolder;
+
+    /* transition: 0.5; */
+
+}
+
+.enter-button:active {
+    background-color: gray;
+
 }
 
 .spinner {
-    margin: 6%;
-    transform: scale(200%);
-    filter: drop-shadow(0 4vw 30px rgba(0, 0, 0, 0.5));
+    position: absolute;
+    width: 100px;
+    height: 100px;
 
     opacity: 0;
-    animation: fadein 0.5s 0s ease-in-out both;
+    /* filter: drop-shadow(0 4vw 30px rgba(0, 0, 0, 0.5)); */
+    /* transition: 0.5; */
+    /* animation: fadein 0.5s 0s ease-in-out both; */
 }
 
 @keyframes fadein {
@@ -101,7 +142,7 @@
     }
 }
 
-.parallax-wrapper {
+.parallax-container {
     width: 100%;
     height: calc(var(--vh, 1vh)*100);
     /* top: 0; */
@@ -109,7 +150,8 @@
     position: fixed;
     background-color: black;
     opacity: 0;
-    transition: opacity 0.7s 0.5s ease-in-out;
+    transition: opacity 0.7s ease-in-out;
+    pointer-events: none;
 }
 
 .parallax {
@@ -123,8 +165,6 @@
 
     transform-style: preserve-3d;
     /* background-color: #ced4f4; */
-
-
 }
 
 .back-container {
@@ -140,93 +180,102 @@
 }
 
 @supports (-webkit-touch-callout: none) {
-    /* CSS specific to iOS devices */ 
+
+    /* CSS specific to iOS devices */
     .parallaxed {
         position: absolute;
-        will-change: transform; 
+        will-change: transform;
         transition: all 400ms cubic-bezier(0.03, 0.98, 0.52, 0.99) 0s;
-    }
-  }
-  
- @supports not (-webkit-touch-callout: none) {
-    /* CSS for other than iOS devices */ 
-    .parallaxed {
-        position: absolute;
-        /* will-change: transform;  */
-        /* transition: all 400ms cubic-bezier(0.03, 0.98, 0.52, 0.99) 0s; */
     }
 }
 
-.parallaxed {
-    /* transition: filter 500ms 0s; */
+@supports not (-webkit-touch-callout: none) {
+
+    /* CSS for other than iOS devices */
+    .parallaxed {
+        position: absolute;
+        /* will-change: transform;  */
+        /* transition: all 1000ms cubic-bezier(0.03, 0.98, 0.52, 0.99) 0s; */
+    }
 }
 
 .sky-container {
     height: 100%;
     width: 100%;
-    z-index: 1;
     background-color: #cbd5ff;
-} 
+}
 
 .sky {
     position: absolute;
     /* height: 50%; */
-    width: 400vw;
+    width: 500vw;
     top: -5%;
     left: 0;
     animation: sky-move1 70s linear infinite;
     opacity: 1;
-} 
-
-@keyframes sky-move1 {
-    0% { transform: translateX(0vw) ; }
-    100% { transform: translateX(calc(400vw / -2)) ; }
 }
 
-.city {
-    padding-right: 15%;
-    width: 150%;
-    top: -3%;
-    z-index: 2;
+@keyframes sky-move1 {
+    0% {
+        transform: translateX(0vw);
+    }
+
+    100% {
+        transform: translateX(calc(500vw / -2));
+    }
+}
+
+.short-building {
+    padding-right: 85%;
+    padding-top: 20%;
+    width: 100%;
+    top: 0;
+}
+
+.tall-building {
+    padding-right: 30%;
+    padding-top: 10%;
+    width: 100%;
+    top: 0;
 }
 
 .people {
-    z-index: 3;
-    width: 130%;
-    opacity: 1;
+    width: 135%;
 }
 
-.title {
-    z-index: 4;
-    filter: drop-shadow(0 4vw 30px rgba(0, 0, 0, 0.5));
-    /* margin-top: -30vh; */
-    padding-bottom: 70%;
-    border: none;
-    width: 83%;
-    /* top: 20%; */
+.text {
+    width: 115%;
+    padding-bottom: 15%;
+}
+
+.blobA {
+    width: 90%;
+    padding-right: 40%;    
+    padding-top: 30%;
+}
+
+.blobB {
+    width: 90%;
+    padding-left: 35%;
+    padding-top: 61%;
+}
+
+.blobC {
+    width: 95%;
+    padding-right: 5%;    
+    padding-top: 90%;
 }
 
 .flags {
     padding-left: 20%;
-    z-index: 5;
-    width: 140%;
-
-    
-}
-
-@keyframes blur {
-    from { filter: blur(0) }
-    to { filter: blur(20px) }
+    width: 160%;
 }
 
 .black-bottom {
     width: 200vh;
     height: 1000px;
     margin-top: calc(1800px);
-    background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 100%);
-    /* background-color: red; */
-    /* opacity: 0.5; */
-    z-index: 6;
+    background: linear-gradient(0deg, rgba(2, 0, 36, 1) 0%, rgba(0, 0, 0, 1) 30%, rgba(0, 0, 0, 0) 100%);
 }
 
 
@@ -244,26 +293,25 @@
     pointer-events: none;
 }
 
-
 .sk-folding-cube {
-    margin: 20px auto;
-    width: 40px;
-    height: 40px;
+    width: 100%;
+    height: 100%;
     position: relative;
     -webkit-transform: rotateZ(45deg);
-            transform: rotateZ(45deg);
-  }
-  
-  .sk-folding-cube .sk-cube {
+    transform: rotateZ(45deg);
+}
+
+.sk-folding-cube .sk-cube {
     float: left;
     width: 50%;
     height: 50%;
     position: relative;
     -webkit-transform: scale(1.1);
-        -ms-transform: scale(1.1);
-            transform: scale(1.1); 
-  }
-  .sk-folding-cube .sk-cube:before {
+    -ms-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+.sk-folding-cube .sk-cube:before {
     content: '';
     position: absolute;
     top: 0;
@@ -272,63 +320,78 @@
     height: 100%;
     background-color: #333;
     -webkit-animation: sk-foldCubeAngle 2.4s infinite linear both;
-            animation: sk-foldCubeAngle 2.4s infinite linear both;
+    animation: sk-foldCubeAngle 2.4s infinite linear both;
     -webkit-transform-origin: 100% 100%;
-        -ms-transform-origin: 100% 100%;
-            transform-origin: 100% 100%;
-  }
-  .sk-folding-cube .sk-cube2 {
+    -ms-transform-origin: 100% 100%;
+    transform-origin: 100% 100%;
+}
+
+.sk-folding-cube .sk-cube2 {
     -webkit-transform: scale(1.1) rotateZ(90deg);
-            transform: scale(1.1) rotateZ(90deg);
-  }
-  .sk-folding-cube .sk-cube3 {
+    transform: scale(1.1) rotateZ(90deg);
+}
+
+.sk-folding-cube .sk-cube3 {
     -webkit-transform: scale(1.1) rotateZ(180deg);
-            transform: scale(1.1) rotateZ(180deg);
-  }
-  .sk-folding-cube .sk-cube4 {
+    transform: scale(1.1) rotateZ(180deg);
+}
+
+.sk-folding-cube .sk-cube4 {
     -webkit-transform: scale(1.1) rotateZ(270deg);
-            transform: scale(1.1) rotateZ(270deg);
-  }
-  .sk-folding-cube .sk-cube2:before {
+    transform: scale(1.1) rotateZ(270deg);
+}
+
+.sk-folding-cube .sk-cube2:before {
     -webkit-animation-delay: 0.3s;
-            animation-delay: 0.3s;
-  }
-  .sk-folding-cube .sk-cube3:before {
+    animation-delay: 0.3s;
+}
+
+.sk-folding-cube .sk-cube3:before {
     -webkit-animation-delay: 0.6s;
-            animation-delay: 0.6s; 
-  }
-  .sk-folding-cube .sk-cube4:before {
+    animation-delay: 0.6s;
+}
+
+.sk-folding-cube .sk-cube4:before {
     -webkit-animation-delay: 0.9s;
-            animation-delay: 0.9s;
-  }
-  @-webkit-keyframes sk-foldCubeAngle {
+    animation-delay: 0.9s;
+}
+
+@-webkit-keyframes sk-foldCubeAngle {
     0%, 10% {
-      -webkit-transform: perspective(140px) rotateX(-180deg);
-              transform: perspective(140px) rotateX(-180deg);
-      opacity: 0; 
-    } 25%, 75% {
-      -webkit-transform: perspective(140px) rotateX(0deg);
-              transform: perspective(140px) rotateX(0deg);
-      opacity: 1; 
-    } 90%, 100% {
-      -webkit-transform: perspective(140px) rotateY(180deg);
-              transform: perspective(140px) rotateY(180deg);
-      opacity: 0; 
-    } 
-  }
-  
-  @keyframes sk-foldCubeAngle {
-    0%, 10% {
-      -webkit-transform: perspective(140px) rotateX(-180deg);
-              transform: perspective(140px) rotateX(-180deg);
-      opacity: 0; 
-    } 25%, 75% {
-      -webkit-transform: perspective(140px) rotateX(0deg);
-              transform: perspective(140px) rotateX(0deg);
-      opacity: 1; 
-    } 90%, 100% {
-      -webkit-transform: perspective(140px) rotateY(180deg);
-              transform: perspective(140px) rotateY(180deg);
-      opacity: 0; 
+        -webkit-transform: perspective(140px) rotateX(-180deg);
+        transform: perspective(140px) rotateX(-180deg);
+        opacity: 0;
     }
-  }
+
+    25%, 75% {
+        -webkit-transform: perspective(140px) rotateX(0deg);
+        transform: perspective(140px) rotateX(0deg);
+        opacity: 1;
+    }
+
+    90%, 100% {
+        -webkit-transform: perspective(140px) rotateY(180deg);
+        transform: perspective(140px) rotateY(180deg);
+        opacity: 0;
+    }
+}
+
+@keyframes sk-foldCubeAngle {
+    0%, 10% {
+        -webkit-transform: perspective(140px) rotateX(-180deg);
+        transform: perspective(140px) rotateX(-180deg);
+        opacity: 0;
+    }
+
+    25%, 75% {
+        -webkit-transform: perspective(140px) rotateX(0deg);
+        transform: perspective(140px) rotateX(0deg);
+        opacity: 1;
+    }
+
+    90%, 100% {
+        -webkit-transform: perspective(140px) rotateY(180deg);
+        transform: perspective(140px) rotateY(180deg);
+        opacity: 0;
+    }
+}
