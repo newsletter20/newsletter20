@@ -26,14 +26,12 @@ function App() {
   const [anchorTiltY, setAnchorTiltY] = useState(0);
 
   const [orientationRequestNeeded, setOrientationRequestNeeded] = useState(true);
-  const [logit, setLogit] = useState("");
 
   const handleScroll = () => {
     const position = (document.body.scrollTop / document.body.clientHeight);
     setScrollPosition(position.toPrecision(3));
   };
 
-  let count = 0;
   const parallax = (zOffset) => {
     const zOrigin = 600;
     let X = 0;
@@ -43,19 +41,16 @@ function App() {
     let tiltY = Math.max(Math.min((deviceTiltY - anchorTiltY), 30), -30);
 
     X += tiltY / 350 * (zOffset + zOrigin)
-    Y += -tiltX / 315 * (zOffset + zOrigin)
+    Y += tiltX / 315 * (zOffset + zOrigin)
 
     Y += Math.min(scrollPosition, 1) * -1 * (zOffset + zOrigin)
 
-    // console.log("X:" + deviceTiltX.toString().substring(0,4) + " - Y:" + deviceTiltY.toString().substring(0,4));
     const transformedStyle =
     {
       transform:
         "translateX(" + X + "px) " +
         "translateY(" + Y + "px)",
     }
-    count++;
-    console.log(count,X,Y);
     return transformedStyle;
   }
 
@@ -78,8 +73,6 @@ function App() {
               //No permission: show ask permission button
               setOrientationRequestNeeded(true);
             }
-            console.log(permissionState);
-            setLogit(permissionState);
           })
           .catch(console.error);
       }
@@ -88,14 +81,12 @@ function App() {
         window.ondeviceorientation = e => handleOrientation(e);
         setOrientationRequestNeeded(false);
         resetOrientation();
-        console.log(2);
       }
     }
     else
     {
       // not supported
       setOrientationRequestNeeded(false);
-      console.log(3);
     }
 
     // Add scroll event listener
@@ -132,7 +123,6 @@ function App() {
     setAnchorTiltY(deviceTiltY);
     console.log("has reset - device=" + deviceTiltX + "anchor=" + anchorTiltX)
   }
-
 
   const requestOrientationPermission = () => {
     DeviceOrientationEvent.requestPermission().then(permissionState => {
@@ -172,7 +162,7 @@ function App() {
           </div>
           <button className="enter-button" 
             style={(orientationRequestNeeded ? {opacity: 1} : {opacity: 0})} 
-            onClick={requestOrientationPermission}>כניסה</button>
+            onClick={() => {requestOrientationPermission(); resetOrientation();}}>כניסה</button>
         </div>
       </div>
 
@@ -188,9 +178,10 @@ function App() {
             <img src={coverText} className='parallaxed text' style={parallax(0)} onLoad={() => { incrementLayerCount(); }} />
           </div>
           <img src={coverFlags} className='parallaxed flags' style={parallax(500)} onLoad={() => { incrementLayerCount(); }} />
-          {/* <div className='parallaxed black-bottom' style={parallax(600)}></div> */}
         </div>
       </div>
+
+      {/* <div className='black-bottom'></div> */}
 
       <div className="long-container" style={(coverFinishedLoading() && longFinishedLoading() ? { height: "auto", animation: "slidein 0.5s 1s ease-in-out both" } : {})}>
           <img className="long-first" src={longfirstlowres} onLoad={() => { setIsFirstLongLoaded(true) }} />\
@@ -207,7 +198,7 @@ function App() {
         <p style={{ fontSize: 30 }}>
           {
             "result: " + Math.max(Math.min((deviceTiltX - anchorTiltX), 90), -90) + ", " +
-            Math.max(Math.min((deviceTiltY - anchorTiltY), 30), -30) + " | initialResetted = " + initialResetted + " | log: " + logit
+            Math.max(Math.min((deviceTiltY - anchorTiltY), 30), -30) + " | initialResetted = " + initialResetted 
           }
         </p> */}
       </div>

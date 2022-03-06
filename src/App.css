@@ -286,6 +286,7 @@
 }
 
 .black-bottom {
+    position: relative;
     width: 200vh;
     height: 1000px;
     margin-top: calc(1800px);
